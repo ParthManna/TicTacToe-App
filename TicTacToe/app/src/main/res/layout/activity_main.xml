@@ -1,0 +1,157 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/background_color"
+    android:gravity="center">
+
+
+    <!-- Scoreboard Row -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <!-- X Indicator -->
+        <TextView
+            android:id="@+id/x_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X (YOU)"
+            android:textColor="#26C6DA"
+            android:textSize="18sp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Turn Indicator -->
+        <TextView
+            android:id="@+id/turn_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X TURN"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:background="#455A64"
+            android:padding="8dp"
+            android:layout_marginEnd="16dp"/>
+
+    </LinearLayout>
+
+    <!-- Tic-Tac-Toe Grid -->
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"
+        >
+
+        <!-- Cells for Tic-Tac-Toe -->
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background" />
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background"/>
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background"/>
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background"/>
+
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background"/>
+
+        <Button
+            android:id="@+id/btn6"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background"/>
+
+        <Button
+            android:id="@+id/btn7"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background"/>
+
+        <Button
+            android:id="@+id/btn8"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background"/>
+
+        <Button
+            android:id="@+id/btn9"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/rounded_corner_background"/>
+    </GridLayout>
+
+    <!-- Score Display -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/x_score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X (YOU) \n     11"
+            android:background="#26C6DA"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/ties_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="32"
+            android:background="#B0BEC5"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/o_score_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11"
+            android:background="#FFCA28"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>
