@@ -8,32 +8,116 @@
     android:background="@drawable/background_1"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/playerturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:text="Player One Turn"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/box"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/playerone_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/box"
+        app:layout_constraintEnd_toStartOf="@+id/playertwo_result"
+        app:layout_constraintRight_toRightOf="@+id/playerone"
+        app:layout_constraintStart_toEndOf="@+id/playerone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/colon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/box"
+        app:layout_constraintEnd_toStartOf="@+id/playertwo_result"
+        app:layout_constraintStart_toEndOf="@+id/playerone_result"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/playertwo_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/box"
+        app:layout_constraintEnd_toStartOf="@+id/playertwo"
+        app:layout_constraintLeft_toLeftOf="@+id/playertwo"
+        app:layout_constraintStart_toEndOf="@+id/playerone_result"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
-        android:id="@+id/"
-        android:layout_width="70dp"
-        android:layout_height="72dp"
+        android:id="@+id/playerone"
+        android:layout_width="92dp"
+        android:layout_height="94dp"
         android:background="@drawable/background_box"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/box"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="70dp"
-        >
+        android:layout_marginStart="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/player_one"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/cross1"
+            android:layout_width="55dp"
+            android:layout_height="62dp"
+            android:src="@drawable/cross"
+            android:scaleType="fitXY" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="70dp"
-        android:layout_height="72dp"
+        android:id="@+id/playertwo"
+        android:layout_width="92dp"
+        android:layout_height="94dp"
         android:background="@drawable/background_box"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="70dp"
-        >
-o
+        android:layout_marginEnd="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/player_two"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="55dp"
+            android:layout_height="57dp"
+            android:src="@drawable/circle"
+            android:scaleType="centerInside" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -64,33 +148,28 @@ o
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
+                android:src="@android:color/transparent"
                 android:background="@drawable/background_innerbox"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp" />
 
             <ImageButton
                 android:id="@+id/box2"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@drawable/background_innerbox"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp" />
 
             <ImageButton
                 android:id="@+id/box3"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@drawable/background_innerbox"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp" />
         </LinearLayout>
 
         <!-- Second Inner Box -->
@@ -108,30 +187,25 @@ o
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@drawable/background_innerbox"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp" />
 
             <ImageButton
                 android:id="@+id/box5"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@drawable/background_innerbox"
-                android:layout_marginEnd="8dp"
-/>
+                android:layout_marginEnd="8dp" />
 
             <ImageButton
                 android:id="@+id/box6"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@drawable/background_innerbox"
                 android:layout_marginEnd="8dp" />
 
@@ -152,35 +226,75 @@ o
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@drawable/background_innerbox"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp" />
 
             <ImageButton
                 android:id="@+id/box8"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@drawable/background_innerbox"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp" />
 
             <ImageButton
                 android:id="@+id/box9"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:scaleType="fitXY"
-                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:background="@drawable/background_innerbox"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/replay"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/background_box"
+        android:src="@drawable/replay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/result"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/box" />
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/back"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/result"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/background_box"
+        android:text="@string/result"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/replay"
+        app:layout_constraintTop_toBottomOf="@+id/box" />
+
+
+
+    <!-- Custom View for drawing the winning line -->
+    <com.example.tictactoe2.LineView
+        android:id="@+id/win_line"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
