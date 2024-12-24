@@ -17,6 +17,13 @@ class MainActivity3 : AppCompatActivity() {
         binding.twoplayerButton.setOnClickListener {
              val intent = Intent(this, MainActivity::class.java)
              startActivity(intent)
+             finish()
+        }
+
+        binding.singleplayerButton.setOnClickListener {
+            val intent = Intent(this, MainActivity7::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

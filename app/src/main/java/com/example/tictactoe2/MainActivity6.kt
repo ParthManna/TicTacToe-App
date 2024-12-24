@@ -17,11 +17,13 @@ class MainActivity6 : AppCompatActivity() {
         binding.backbutton.setOnClickListener {
             val intent = Intent(this, MainActivity3::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.playagain.setOnClickListener{
             val intent2 = Intent(this, MainActivity::class.java)
             startActivity(intent2)
+            finish()
         }
     }
 }

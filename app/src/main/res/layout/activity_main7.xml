@@ -268,8 +268,8 @@
         android:layout_height="60dp"
         android:background="@android:color/transparent"
         android:src="@drawable/back"
-        android:scaleType="centerCrop"
         android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
