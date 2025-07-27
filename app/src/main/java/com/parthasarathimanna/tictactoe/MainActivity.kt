@@ -1,16 +1,14 @@
 package com.parthasarathimanna.tictactoe
 
-
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.tictactoe2.LineView
 import com.parthasarathimanna.tictactoe.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -18,6 +16,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     var TURN_COUNT = 0
     var PLAYER_ONE_SCORE = 0
     var PLAYER_TWO_SCORE = 0
+    var result = false
 
     var boardStatus = Array(3) { IntArray(3) }
 
@@ -25,6 +24,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var board: Array<Array<ImageButton>>
     private lateinit var winLineView: LineView
+
+    private var moveSoundPlayer: MediaPlayer? = null
+    private var eventSoundPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,24 +50,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         initializeBoardStatus()
 
-        // Reset game on replay button click
         binding.replay.setOnClickListener {
             PLAYER = true
             TURN_COUNT = 0
+            result = false
             binding.playerturn.text = "Player One Turn"
             initializeBoardStatus()
             winLineView.visibility = View.GONE
         }
 
         binding.back.setOnClickListener {
-
             val intent = Intent(this, MainActivity3::class.java)
             startActivity(intent)
             finish()
         }
 
-        // Update player scores
         updatePlayerScores()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        moveSoundPlayer?.release()
+        eventSoundPlayer?.release()
+        moveSoundPlayer = null
+        eventSoundPlayer = null
     }
 
     private fun initializeBoardStatus() {
@@ -80,6 +88,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
+        if (result) return
         when (v.id) {
             R.id.box1 -> updateValue(row = 0, col = 0, player = PLAYER)
             R.id.box2 -> updateValue(row = 0, col = 1, player = PLAYER)
@@ -91,25 +100,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.box8 -> updateValue(row = 2, col = 1, player = PLAYER)
             R.id.box9 -> updateValue(row = 2, col = 2, player = PLAYER)
         }
+
+        playMoveSound() // Play sound for every move
+
         TURN_COUNT++
 
         if (checkWinner()) {
             if (PLAYER) {
                 PLAYER_ONE_SCORE++
                 binding.playerturn.text = "Player One Wins"
+                playWinSound()
             } else {
                 PLAYER_TWO_SCORE++
                 binding.playerturn.text = "Player Two Wins"
+                playLoseSound()
             }
             updatePlayerScores()
             disableBoard()
+            result = true
         } else if (TURN_COUNT == 9) {
             binding.playerturn.text = "Draw Match"
+            playDrawSound()
+            result = true
         } else {
             PLAYER = !PLAYER
             binding.playerturn.text = if (PLAYER) "Player One Turn" else "Player Two Turn"
         }
-
     }
 
     private fun updateValue(row: Int, col: Int, player: Boolean) {
@@ -125,7 +141,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         boardStatus[row][col] = if (player) 1 else 0
     }
-
 
     private fun checkWinner(): Boolean {
         val winnerExists = when {
@@ -167,12 +182,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val startButton = board[rowStart][colStart]
         val endButton = board[rowEnd][colEnd]
 
-
         val startLocation = IntArray(2)
         val endLocation = IntArray(2)
         startButton.getLocationOnScreen(startLocation)
         endButton.getLocationOnScreen(endLocation)
-
 
         val parentLocation = IntArray(2)
         winLineView.getLocationOnScreen(parentLocation)
@@ -185,7 +198,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         winLineView.drawWinLine(startX, startY, endX, endY)
     }
 
-
     private fun disableBoard() {
         for (i in 0..2) {
             for (j in 0..2) {
@@ -195,19 +207,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updatePlayerScores() {
-        // Update the player scores on the UI
         binding.playeroneResult.text = PLAYER_ONE_SCORE.toString()
         binding.playertwoResult.text = PLAYER_TWO_SCORE.toString()
 
         binding.result.setOnClickListener {
             if (PLAYER_ONE_SCORE > PLAYER_TWO_SCORE) {
                 val intent1 = Intent(this, MainActivity4::class.java)
-                intent1.putExtra("gameMode", "oneplayer")
+                intent1.putExtra("gameMode", "twoplayer")
                 startActivity(intent1)
-                finish() // Optional: close the current activity
+                finish()
             } else if (PLAYER_ONE_SCORE < PLAYER_TWO_SCORE) {
                 val intent2 = Intent(this, MainActivity5::class.java)
-                intent2.putExtra("gameMode", "oneplayer")
+                intent2.putExtra("gameMode", "twoplayer")
+                intent2.putExtra("winner", "twoplayer")
                 startActivity(intent2)
                 finish()
             } else if (PLAYER_ONE_SCORE == PLAYER_TWO_SCORE) {
@@ -216,5 +228,31 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
         }
+    }
+
+    // MediaPlayer helpers
+
+    private fun playMoveSound() {
+        moveSoundPlayer?.release()
+        moveSoundPlayer = MediaPlayer.create(this, R.raw.move)
+        moveSoundPlayer?.start()
+    }
+
+    private fun playWinSound() {
+        eventSoundPlayer?.release()
+        eventSoundPlayer = MediaPlayer.create(this, R.raw.win)
+        eventSoundPlayer?.start()
+    }
+
+    private fun playLoseSound() {
+        eventSoundPlayer?.release()
+        eventSoundPlayer = MediaPlayer.create(this, R.raw.lose)
+        eventSoundPlayer?.start()
+    }
+
+    private fun playDrawSound() {
+        eventSoundPlayer?.release()
+        eventSoundPlayer = MediaPlayer.create(this, R.raw.draw)
+        eventSoundPlayer?.start()
     }
 }
